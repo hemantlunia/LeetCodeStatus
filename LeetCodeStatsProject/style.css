@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+body {
+  background-color: blue;
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: blueviolet;
+  padding: 20px;
+  border-radius: 6px;
+  width: 50%;
+  max-width: 600px;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+
+.user-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: start;
+}
+
+.user-input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#user-input {
+  width: 80%;
+  padding: 0.4rem;
+  border-radius: 7px;
+}
+
+#search-btn {
+  padding: 0.4rem;
+  border-radius: 7px;
+}
+
+.circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid greenyellow;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: white;
+  font-weight: 700;
+  flex-direction: column;
+  background: conic-gradient(greenyellow var(--progress-degree, 0%), green 0%);
+}
+
+.circle span {
+  position: relative;
+  z-index: 2;
+}
+
+.progress {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.stata-cards {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-evenly;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+.card {
+  background-color: aqua;
+  width: 40%;
+  max-width: 290px;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  min-height: 4rem;
+}
