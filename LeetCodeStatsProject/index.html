@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Leet Code Status</h1>
+      <h1 id="heading">Leet Code Status</h1>
 
       <div class="user-container">
         <p>Enter Your UserName Below :</p>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="stats-container">
-        <div class="progress">
+        <div style="display: none;" class="progress" id="progrees-bar">
             <div class="progress-item">
                 <div class="easy-progress circle">
                     <span id="easy-label"></span>
@@ -42,6 +42,8 @@
             <!-- card display here -->
         </div>
       </div>
+      <!-- table items -->
+       <div id="tableContainer"></div>
     </div>
     <script src="script.js"></script>
   </body>

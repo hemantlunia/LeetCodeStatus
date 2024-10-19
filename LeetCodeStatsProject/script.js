@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const mediumLabel = document.getElementById("medium-label");
   const hardLabel = document.getElementById("hard-label");
   const cardStatsContainer = document.querySelector(".stats-card");
+  const heading = document.querySelector("#heading");
 
   // validate leetcode username
   function validateUsername(username) {
@@ -32,27 +33,33 @@ document.addEventListener("DOMContentLoaded", function () {
       searchButton.textContent = "Searching...";
       searchButton.disabled = true;
       const response = await fetch(url);
-      console.log(response);
+      // console.log(response);
+      document.querySelector("#progrees-bar").style.display = "flex";
 
       if (!response.ok) {
         throw new Error("Unable to fetch the user Details");
       }
       const userdata = await response.json();
-      console.log("User Data : ", userdata);
+      heading.textContent = `${username}, LeetCode Status!`;
+      heading.style.color = "yellow";
+      // console.log("User Data : ", userdata.submissionCalendar);
       displayUserData(userdata);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
 
       statsContainer.innerHTML = `<p>${error.message}</p>`;
     } finally {
       searchButton.textContent = "Search";
       searchButton.disabled = false;
+      usernameInput.value = "";
     }
   }
 
   function updateProgress(solved, total, label, circle) {
     const progressDegree = (solved / total) * 100;
-    circle.style.setProperty("--progress-degree", `${progressDegree}`);
+    // console.log(progressDegree);
+
+    circle.style.setProperty("--progress-degree", `${progressDegree}%`);
     label.textContent = `${solved}/${total}`;
   }
 
@@ -96,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
         value: solvedTotalQues,
       },
       {
-        label: "AcceptanceRate",
+        label: "Acceptance Rate",
         value: userdata.acceptanceRate + "%",
       },
       {
@@ -115,11 +122,52 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
       })
       .join("");
+
+    // submissin Date
+    function convertTimestampToDate(timestamp) {
+      const date = new Date(timestamp * 1000); 
+      return date.toLocaleDateString("en-GB",{
+        day:"numeric",
+        month: "long",
+        year: "numeric"
+      });
+    }
+
+    const SubmitionDate = userdata.submissionCalendar;
+
+    const tableRows = Object.keys(SubmitionDate)
+      .reverse()
+      .slice(0,8)
+      .map((key) => {
+        return `
+        <tr>
+          <td>${convertTimestampToDate(key)}</td>
+          <td>${SubmitionDate[key]}</td>
+        </tr>
+      `;
+      })
+      .join(""); 
+
+    const tableHTML = ` <h2 style="color:red;">Last 8 Submissions</h2>
+      <table id="timestampsTable">
+        <thead>
+          <tr>
+            <th>Submission Date</th>
+            <th>Submission Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${tableRows}
+        </tbody>
+      </table>
+    `;
+
+    document.getElementById("tableContainer").innerHTML = tableHTML;
   }
 
   searchButton.addEventListener("click", function () {
     const username = usernameInput.value;
-    console.log("username : ", username);
+    // console.log("username : ", username);
     if (validateUsername(username)) {
       fetchUserdetails(username);
     }
